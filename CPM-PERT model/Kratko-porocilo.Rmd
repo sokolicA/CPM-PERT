@@ -38,8 +38,10 @@ Metoda Monte Carlo je zalo uporabna, predvsem ker načeloma ni pomembno kako kom
 
 Glavni problem te metode je povezan z naključnostjo. Računalnik namreč ne zna generirati zares naključnih števil, le psevdo naključna. To pomeni, da so števila le navidezno slučajna, v resnici pa so vseeno odvisna od nekaterih zunanjih dejavnikov, odvisno od algoritma. V resničnem življenju je naključnost res naključna, kar lahko pripelje do odstopanj. 
 
+
 Problem te metode nasopi tudi, če želimo izračunati zelo majhne oziroma zelo natančne vrednosti. Hitrost oz. natančnost metode je omejena s centralnim limitnim izrekom, zato za vsako novo decimalko potrebujemo veliko (okrog 100 krat) več časa kot za prejšnjo. 
 
 # Plan dela
 
 Pri projektu bova najprej naredila program, ki bo za dano tabelo projekta (trije vektorji: *opravilo*, *seznam predhodnih opravil* in *trajanje opravila*) vrnil vrstni red opravljanja in optimalni čas trajanja celotnega projekta. Nato bova z metodo Monte Carlo za izbran določen projekt simulirala čas trajanja celotnega projekta, kjer bodo trajanja posameznega opravila slučajne spremenljivke z določeno porazdelitvijo. S to metodo bova tudi dobila približek pričakovanega trajanja projekta, rezultate pa bova tudi analizirala glede na standardni odklon.
+

@@ -25,4 +25,3 @@ Pri obeh metodah lahko projekt predstavimo kot graf:
 Če je graf brez ciklov, potem je projekt smiseln (če bi bilo opravilo *i* pogoj za poravilo *j* in poravilo *j* pogoj za opravilo *i*, bi bil projekt neizvedljiv. Isto velja tudi za daljše cikle.). V tem primeru imamo za graf topološko urejanje, s katerim lahko določimo vrstni red opravljanja opravil. To pomeni, da pred opravilom *j* opravimo vsa opravila iz njegove množice opravil, ki so pogoj za začetek njegovega opravljanja.
 
 Pri obeh metodah iščemo kritično pot, to je pot v grafu, kjer so vsa opravila kritična. Posamezno opravilo *o* je kritično, če pri začetku opravljanja opravila *o* nimamo fleksibilnosti (to pomeni, da začetka opravljanja opravila *o* ne moremo prestaviti na poznejši čas, brez da bi s tem podaljšali čas izvajanja projekta). 
-

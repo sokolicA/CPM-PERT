@@ -5,20 +5,19 @@ date: "04 januar 2017"
 output: pdf_document
 ---
 
-## CPM-PERT model
+# Metodi CPM in PERT
 
 Podan imamo projekt, ki je sestavljen iz množice opravil. Za vsako opravilo *o* imamo podano trajanje, lahko pa tudi množico drugih opravil, ki jih moramo opraviti pred začetkom opravila *o*. 
+Projekt lahko upravljamo preko dveh sorodnih metod.
 
-```{r cars}
-summary(cars)
-```
+- Prva se imenuje CPM (*critical path method*), pri kateri imamo trajanje posameznega opravila podano deterministično. CPM metoda je uporabna predvsem pri projektih, kjer je mogoče precej natančno določiti trajanje opravil. 
 
-## Including Plots
+- Druga metoda se imenuje PERT (*project evaluation and review technique*), kjer je trajanje opravila podano kot slučajna spremenljivka z določeno porazdelitvijo. V tem primeru računamo pričakovan čas trajanja celotnega projekta ali verjetnost, da bo projekt zaključen v določenem roku.
 
-You can also embed plots, for example:
+Pri obeh metodah lahko projekt predstavimo kot graf:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+- vozlišča so natanko podana opravila, dodamo pa še dve dodatni vozlišči in sicer *s* (start) in *z* (zaključek).
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+- povezave: usmerjeno povezavo iz opravila *i* v *j* dodamo, če je opravilo *i* pogoj za začetek poravljanja opravila *j*. Če vozlišče *i* nima nobenih pogojev, dodamo povezavo iz *s* v *i* in če *j* ni pogoj za nobeno drugo opravilo, dodamo povezavo iz *j* do *z*.  
+
+- utež na povezavi od *i* do *j* je natanko trajanje opravila *i*. Opravili *s* in *z* imata trajanje 0. 

@@ -7,7 +7,7 @@ output: pdf_document
 
 ## CPM-PERT model
 
-Podan imamo projekt, ki je sestavljen iz množice opravil. Za vsako opravilo imamo podano trajanje, lahko pa tudi množico drugih opravil, ki jih moramo opraviti pred začetkom tega opravila.
+Podan imamo projekt, ki je sestavljen iz množice opravil. Za vsako opravilo *o* imamo podano trajanje, lahko pa tudi množico drugih opravil, ki jih moramo opraviti pred začetkom opravila *o*.
 
 ```{r cars}
 summary(cars)

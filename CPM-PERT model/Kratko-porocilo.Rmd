@@ -7,21 +7,35 @@ output: pdf_document
 
 # Metodi CPM in PERT
 
-Podan imamo projekt, ki je sestavljen iz množice opravil. Za vsako opravilo *o* imamo podano trajanje, lahko pa tudi množico drugih opravil, ki jih moramo opraviti pred začetkom opravila *o*. 
+Podan imamo projekt, ki je sestavljen iz množice *n* opravil. Za vsako opravilo *o* imamo podano trajanje, lahko pa tudi množico drugih opravil, ki jih moramo opraviti pred začetkom opravila *o*. 
 Projekt lahko upravljamo preko dveh sorodnih metod.
 
 - Prva se imenuje CPM (*critical path method*), pri kateri imamo trajanje posameznega opravila podano deterministično. CPM metoda je uporabna predvsem pri projektih, kjer je mogoče precej natančno določiti trajanje opravil. 
 
-- Druga metoda se imenuje PERT (*project evaluation and review technique*), kjer je trajanje opravila podano kot diskretna slučajna spremenljivka s tremi podanimi ocenami za trajanje projekta: oprimistično, pesimistično in najbolj verjetno. V tem primeru računamo pričakovan čas trajanja celotnega projekta ali verjetnost, da bo projekt zaključen v določenem roku.
+- Druga metoda se imenuje PERT (*project evaluation and review technique*), kjer je trajanje opravila podano kot diskretna slučajna spremenljivka s tremi podanimi ocenami za trajanje projekta: optimistično, pesimistično in najbolj verjetno. V tem primeru računamo pričakovan čas trajanja celotnega projekta ali verjetnost, da bo projekt zaključen v določenem roku.
 
 Pri obeh metodah lahko projekt predstavimo kot graf:
 
-- vozlišča so natanko podana opravila, dodamo pa še dve dodatni vozlišči in sicer *s* (start) in *z* (zaključek).
+- vozlišča so natanko podana opravila, dodamo pa še dve dodatni vozlišči in sicer *s* (*0*) - start in *z* (*n+1*) - zaključek.
 
-- povezave: usmerjeno povezavo iz opravila *i* v *j* dodamo, če je opravilo *i* pogoj za začetek poravljanja opravila *j*. Če vozlišče *i* nima nobenih pogojev, dodamo povezavo iz *s* v *i* in če *j* ni pogoj za nobeno drugo opravilo, dodamo povezavo iz *j* do *z*.  
+- povezave: usmerjeno povezavo iz opravila *i* v *j* dodamo, če je opravilo *i* pogoj za začetek opravljanja opravila *j*. Če vozlišče *i* nima nobenih pogojev, dodamo povezavo iz *s* v *i* in če *j* ni pogoj za nobeno drugo opravilo, dodamo povezavo iz *j* do *z*.  
 
 - utež na povezavi od *i* do *j* je natanko trajanje opravila *i*. Opravili *s* in *z* imata trajanje 0. 
 
-Če je graf brez ciklov, potem je projekt smiseln (če bi bilo opravilo *i* pogoj za poravilo *j* in poravilo *j* pogoj za opravilo *i*, bi bil projekt neizvedljiv. Isto velja tudi za daljše cikle.). V tem primeru imamo za graf topološko urejanje, s katerim lahko določimo vrstni red opravljanja opravil. To pomeni, da pred opravilom *j* opravimo vsa opravila iz njegove množice opravil, ki so pogoj za začetek njegovega opravljanja.
+Če je graf brez ciklov, potem je projekt smiseln (če bi bilo opravilo *i* pogoj za poravilo *j* in opravilo *j* pogoj za opravilo *i*, bi bil projekt neizvedljiv. Isto velja tudi za daljše cikle.). V tem primeru imamo za graf topološko urejanje, s katerim lahko določimo vrstni red opravljanja opravil. To pomeni, da pred opravilom *j* opravimo vsa opravila iz njegove množice opravil, ki so pogoj za začetek njegovega opravljanja.
 
 Pri obeh metodah iščemo kritično pot, to je pot v grafu, kjer so vsa opravila kritična. Posamezno opravilo *o* je kritično, če pri začetku opravljanja opravila *o* nimamo fleksibilnosti (to pomeni, da začetka opravljanja opravila *o* ne moremo prestaviti na poznejši čas, brez da bi s tem podaljšali čas izvajanja projekta). 
+
+V najinem projektu se bova osredotočila na metodo PERT (oziroma na njeno različico), ker bodo trajanja različnih opravil podana kot slučajne spremenljivke. Te slučajne spremenljivke ne bodo imele le treh možnih vrednosti trajanja opravila, ampak bodo porazdeljene po različnih porazdelitvenih zakonih. Najin cilj je določiti pričakovano vrednost trajanja projekta pri različnih porazdelitvah trajanja posameznega opravila. 
+
+# Metoda Monte Carlo
+
+Za računanje pričakovane vrednosti trajanja bova uporabila metodo Monte Carlo. Monte Carlo je metoda, ki pri reševanju problemov uporablja verjetnost oz. naključnost. Uporablja se predvsem za numerično reševanje težkih problemov, ki jih ni mogoče oz. jih je zelo težko rešiti s pomočjo drugih znanih metod. Ta metoda se je zelo razvila šele v zadnjih 30 letih, ko se je zmogljivost računalnikov zelo povečala.
+
+Metoda Monte Carlo temelji na tem, da določen "poskus" ponovimo zelo velikokrat, pri tem pa uporabljamo psevdo slučajnost. Na koncu izmed vseh dobljenih rezultatov lahko dobimo porazdelitev, matematično upanje... Natančnost postopka lahko določimo iz standardnega odklona. Teoretična osnova za to metodo je centralni limitni izrek.
+
+Metoda Monte Carlo je zalo uporabna, predvsem ker načeloma ni pomembno kako komplicirani so podatki (v najinem primeru naprimer za samo metodo ni pomembno kako je porazdeljena slučajna spremenljivka trajanja posameznega opravila). Ta metoda nam omogoča precej dobro simulacijo realnega scenarija, sploh če imamo dovolj zmogljiv računalnik za res velikokratno ponovitev poskusa. 
+
+Glavni problem te metode je povezan z naključnostjo. Računalnik namreč ne zna generirati zares naključnih števil, le psevdo naključna. To pomeni, da so števila le navidezno slučajna, v resnici pa so vseeno odvisna od nekaterih zunanjih dejavnikov, odvisno od algoritma. V resničnem življenju je naključnost res naključna, kar lahko pripelje do odstopanj. 
+
+Problem te metode nasopi tudi, če želimo izračunati zelo majhne oziroma zelo natančne vrednosti. Hitrost oz. natančnost metode je omejena s centralnim limitnim izrekom, zato za vsako novo decimalko potrebujemo veliko več časa kot za prejšnje. 

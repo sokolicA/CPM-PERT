@@ -13,5 +13,18 @@ matrika.graf<-function(Opr, Pred, Cas){
      O[!O %in% p]
     }
   }
+  for(i in 1:(z+1)){
+    for(j in 1:(z+1)){
+      if(is.na(A[i,j])){
+        A[i,j]<-0
+      }
+    }
+  }
+  for(i in 1:z){
+    if(sum(A[i,])==0){
+      A[i,z+1]<-1
+    }
+  }
+    
   return(A)
 }

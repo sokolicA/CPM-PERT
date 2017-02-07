@@ -1,7 +1,8 @@
-Opr<-c(1,2,3,4)
-Pred<-list(c(0),c(1),c(0),c(2,3))
-Opr1<-(1:12)
-Pred1<-list(c(0),c(0),c(0),c(1,2),c(4),c(3),c(5,6),c(7),c(8),c(7),c(10),c(10))
+#Opr<-c(1,2,3,4)
+#stPred<-list(c(0),c(1),c(0),c(2,3))
+Opr<-(1:12)
+Pred<-list(c(0),c(0),c(0),c(1,2),c(4),c(3),c(5,6),c(7),c(8),c(7),c(10),c(10))
+#Funkcija Adj sestavi matriko sosednosti, če imamo podan vektor opravil in seznam sosedov
 Adj<-function(Opr, Pred){
   z=length(Opr)+1
   NO<-c(0, Opr,z)
@@ -29,17 +30,29 @@ Adj<-function(Opr, Pred){
     
   return(A)
 }
-top.sort<-function(Opr,adj){
-  Q<-list()
-  i<-1
+#Topološko urejanje
+top.sort<-function(Opr,Pred){
+  Q<-c()
   st<-c()
-  for(v in Opr){
+  top.ured<-c()
+  adj<-Adj(Opr,Pred)
+  z=length(Opr)+1
+  NO<-c(1, Opr+1,z+1)
+  for(v in NO){
     st[v]<-sum(adj[,v])
   }
-  for(v in Opr){
+  for(v in NO){
     if (st[v]==0){
-      Q[[i]]<-v
-      i<-i+1
+      Q<-c(Q,v)
+    }
+  }
+  j<-1
+  while(length(Q)>0){
+    for(u in Q){
+      remove<-c(u)
+      Q[!Q %in% remove]
+      top.ured[u]<-j
+      j<-j+1
     }
   }
 }

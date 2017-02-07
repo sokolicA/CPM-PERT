@@ -1,7 +1,7 @@
 #Opr<-c(1,2,3,4)
 #stPred<-list(c(0),c(1),c(0),c(2,3))
 Opr<-(1:12)
-Pred<-list(c(0),c(0),c(0),c(1,2),c(4),c(3),c(5,6),c(7),c(8),c(7),c(10),c(10))
+Pred<-list(c(0),c(0),c(1,2),c(2),c(3),c(0),c(5,6),c(7),c(8),c(7),c(10),c(10))
 #Funkcija Adj sestavi matriko sosednosti, če imamo podan vektor opravil in seznam sosedov
 Adj<-function(Opr, Pred){
   z=length(Opr)+1
@@ -47,14 +47,26 @@ top.sort<-function(Opr,Pred){
     }
   }
   j<-1
-  while(length(Q)>0){
+  top.ured<-c()
+  while(j<(length(Pred)+2)){
     for(u in Q){
       remove<-c(u)
-      Q[!Q %in% remove]
+      Q<-Q[!Q %in% remove]
       top.ured[u]<-j
       j<-j+1
+      s<-adj[u,]
+      for(v in 1:length(s)){
+        if(s[v]==1){
+          st[v]<-st[v]-1
+          if(st[v]==0){
+            Q<-c(Q,v)
+          }
+        }
+      }
     }
   }
+  
+  return(top.ured)
 }
 
 

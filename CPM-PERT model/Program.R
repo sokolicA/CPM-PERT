@@ -2,6 +2,7 @@
 #stPred<-list(c(0),c(1),c(0),c(2,3))
 Opr<-(1:12)
 Pred<-list(c(0),c(1),c(2,7),c(0),c(0),c(4,5),c(6),c(3),c(3),c(8),c(9),c(9))
+Cas<-c(5,3,4,9,12,3,1,7,5,1,3,6)
 #Funkcija Adj sestavi matriko sosednosti, če imamo podan vektor opravil in seznam sosedov
 Adj<-function(Opr, Pred){
   z=length(Opr)+1
@@ -53,7 +54,7 @@ top.sort<-function(Opr,Pred){
       Q<-c(Q,v)
     }
   }
-  j<-1
+  j<-0
   top.ured<-c()
   while(j<(length(Pred)+2)){ 
     for(u in Q){
@@ -76,8 +77,33 @@ top.sort<-function(Opr,Pred){
   #dobimo vektor zaporednih številk opravljanja opravil
   return(top.ured)
 }
-
-
+#funkcija vrstni.red nam vrne vrstni red opravljanja opravil
+vrstni.red<-function(sez){
+  j<-0
+  zaporedje<-c()
+  while(j<length(sez)){
+    for(i in 1:length(sez)){
+      if(sez[i]==j){
+        zaporedje[j]<-i-1
+        j<-j+1
+      }
+    }
+  }
+  return(zaporedje)
+}
+min.cas.zac<-function(Opr,Pred,Cas){
+  vr<-vrstni.red(top.sort(Opr,Pred))
+  cas<-c()
+  cas[vr[1]]<-0
+  for (i in 2:(length(vr)-1)){
+    c.pred<-c(0)
+    for(j in Pred[[vr[i]]]){
+      c.pred<-c(c.pred,cas[j]+Cas[j])
+    }
+    cas[vr[i]]<-max(c.pred)
+  }
+  return(cas)
+}
 
 
 

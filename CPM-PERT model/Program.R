@@ -91,7 +91,7 @@ vrstni.red<-function(sez){
   }
   return(zaporedje)
 }
-min.cas.zac<-function(Opr,Pred,Cas){
+trajanje<-function(Opr,Pred,Cas){
   vr<-vrstni.red(top.sort(Opr,Pred))
   cas<-c()
   cas[vr[1]]<-0
@@ -102,7 +102,19 @@ min.cas.zac<-function(Opr,Pred,Cas){
     }
     cas[vr[i]]<-max(c.pred)
   }
-  return(cas)
+  a<-Adj(Opr,Pred)[,length(vr)+1]
+  predh<-c()
+  for(i in 1:length(a)){
+    if(a[i]==1){
+      predh<-c(predh,(i-1))
+    }
+  }
+  c1<-c()
+  for(j in predh){
+    c1<-c(c1,cas[j]+Cas[j])
+  }
+  konec<-max(c1)
+  return(konec)
 }
 
 

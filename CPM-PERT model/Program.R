@@ -91,17 +91,22 @@ vrstni.red<-function(sez){
   }
   return(zaporedje)
 }
+#funkcija trajanje nam izračuna čas trajanja projekta
 trajanje<-function(Opr,Pred,Cas){
   vr<-vrstni.red(top.sort(Opr,Pred))
   cas<-c()
-  cas[vr[1]]<-0
-  for (i in 2:(length(vr)-1)){
+  cas[vr[1]]<-0 #prvo opravilo lahko začnemo v času 0
+  for (i in 2:(length(vr)-1)){ #gledamo za opravila, brez končnega - končno opravilo obdelamo na koncu
     c.pred<-c(0)
-    for(j in Pred[[vr[i]]]){
+    #za vsako predhodno opravilo opravila na i-tem mestu poiščemo čas, ko to opravilo lahko začnemo in
+    #mu prištejemo čas opravljanja
+    for(j in Pred[[vr[i]]]){ 
       c.pred<-c(c.pred,cas[j]+Cas[j])
     }
+    #maksimum teh števil je minimalni čas, ko lahko začnemo opravljati opravilo z zaporedno številko i
     cas[vr[i]]<-max(c.pred)
   }
+  #obravnavamo še končno opravilo. Delamo po istem postopku kot prej. Dobimo čas zaključka končnega opravila
   a<-Adj(Opr,Pred)[,length(vr)+1]
   predh<-c()
   for(i in 1:length(a)){

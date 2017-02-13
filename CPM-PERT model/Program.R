@@ -124,3 +124,30 @@ trajanje<-function(Opr,Pred,Cas){
   konec<-max(c1)
   return(konec)
 }
+
+###################################################################################################################
+
+simul1 <- function(cas, sd, p) {
+        sluc <- vector(length = length(cas))
+        i <- 1
+        for(c in cas){
+                sluc[i] <- rtruncnorm(1, c * p, mean = c, sd = sd)
+                i <- i+1
+        }
+        return(sluc)
+}
+
+simul2 <- function(cas, m, p) {
+        sluc <- vector(length = length(cas))
+        i <- 1
+        for(c in cas){
+                sluc[i] <- runif(1, min = m*c, max = p * c)
+                i <- i+1
+        }
+        return(sluc)
+}
+
+mean(replicate(1000, trajanje(Opr, Pred, simul1(Cas, 0.1, 0.9))))
+
+mean(replicate(1000, trajanje(Opr, Pred, simul2(Cas, 0.8, 1.2))))
+
